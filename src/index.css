@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-black h-screen w-full;
+    @apply bg-gray-950 h-screen w-full;
   }
 }

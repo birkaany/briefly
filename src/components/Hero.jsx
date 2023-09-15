@@ -3,14 +3,17 @@ const Hero = () => {
     <header className="p-3 w-full my-6 flex flex-col">
       <nav className="container mx-auto flex justify-between w-full">
         <div className="text-white uppercase text-2xl ">
-          <span className="text-yellow-400 font-bold">Brief</span>ly
+          <span className="text-yellow-400 font-bold pointer-events-none">
+            Brief
+          </span>
+          ly
         </div>
         <div>
           <a
             href="https://github.com/birkaany"
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-gray-800 px-6 py-3 text-white transition-all hover:text-gray-800 hover:bg-white pointer-events-none pointer-"
+            className="rounded-full bg-gray-800 px-6 py-3 text-white transition-all hover:text-gray-800 hover:bg-white"
           >
             Github
           </a>
