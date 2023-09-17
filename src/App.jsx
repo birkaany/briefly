@@ -1,4 +1,5 @@
 import "./App.css";
+import BrowseHistory from "./components/BrowseHistory";
 import Hero from "./components/Hero";
 import SummarizerInput from "./components/SummarizerInput";
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <Hero />
       <SummarizerInput />
+      <BrowseHistory />
     </>
   );
 }

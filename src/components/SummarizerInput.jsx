@@ -1,35 +1,30 @@
 import { useState } from "react";
-const rapidApiKey = import.meta.env.VITE_RAPID_API_SUMMARIZER_KEY;
+import { useDispatch } from "react-redux";
+import { addArticle } from "../store/features/articlesSlice";
+import { useLazyFetchArticleQuery } from "../api/apiSlice";
 
 const SummarizerInput = () => {
-  const [article, setArticle] = useState({
-    url: "",
-    summary: "",
-  });
-  function handleSubmit(e) {
-    e.preventDefault();
-    fetchData(article.url);
-  }
-  async function fetchData(websiteUrl) {
-    const url = `https://article-extractor-and-summarizer.p.rapidapi.com/summarize?url=${websiteUrl}&length=3&lang=tr`;
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": rapidApiKey,
-        "X-RapidAPI-Host": "article-extractor-and-summarizer.p.rapidapi.com",
-      },
-    };
+  const dispatch = useDispatch();
+  const [articleUrl, setArticleUrl] = useState("");
+  const [fetchArticle] = useLazyFetchArticleQuery();
 
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      setArticle({
-        ...article,
-        summary: JSON.stringify(result.summary),
-      });
-    } catch (error) {
-      console.error(error);
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (articleUrl == "") {
+      return;
     }
+    const { data } = await fetchArticle({
+      articleUrl: articleUrl,
+    });
+    if (data) {
+      dispatch(
+        addArticle({
+          url: articleUrl,
+          summary: data.summary,
+        })
+      );
+    }
+    setArticleUrl("");
   }
 
   return (
@@ -43,13 +38,10 @@ const SummarizerInput = () => {
             className="max-w-lg flex-1 bg-transparent outline-none text-white border-gray-900 px-6 py-3"
             placeholder="Enter URL"
             type="url"
-            value={article.url}
+            value={articleUrl}
             onChange={(e) => {
-              const nextArticle = {
-                ...article,
-                url: e.target.value,
-              };
-              setArticle(nextArticle);
+              const nextArticleUrl = e.target.value;
+              setArticleUrl(nextArticleUrl);
             }}
           />
           <button
@@ -59,7 +51,6 @@ const SummarizerInput = () => {
             ⏎
           </button>
         </form>
-        <p className="text-white">{article?.summary}</p>
       </div>
     </div>
   );
