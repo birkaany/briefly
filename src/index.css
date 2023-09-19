@@ -6,6 +6,9 @@
   body {
     @apply bg-gray-950 h-screen w-full text-white;
   }
+  .container {
+    @apply px-4 xl:px-0;
+  }
 }
 
 @layer utilities {
