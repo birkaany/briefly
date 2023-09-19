@@ -18,7 +18,7 @@ export const apiSlice = createApi({
       query: (params) =>
         `summarize?url=${encodeURIComponent(
           params.articleUrl
-        )}&length=3&lang=tr`,
+        )}&length=2&lang=en`,
     }),
   }),
 });
