@@ -7,3 +7,9 @@
     @apply bg-gray-950 h-screen w-full text-white;
   }
 }
+
+@layer utilities {
+  .active {
+    @apply bg-yellow-400 text-gray-800;
+  }
+}

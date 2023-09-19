@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 
 const BrowseHistory = () => {
   const articles = useSelector((state) => state.articles.articles);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(
+    articles ? articles[0].id : null
+  );
 
   return (
     <section className="my-16">
@@ -15,11 +17,12 @@ const BrowseHistory = () => {
             </h2>
             <ul className="flex flex-col items-start gap-3 ">
               {articles?.map((item) => {
+                const activeClass = item.id === selectedItem ? "active" : "";
                 return (
                   <li
                     onClick={() => setSelectedItem(item.id)}
                     key={item.id}
-                    className="bg-gray-700 rounded-md p-3 w-full hover:bg-gray-600 cursor-pointer transition-all text-sm"
+                    className={`bg-gray-700 rounded-md p-3 w-full hover:bg-yellow-400 hover:text-gray-800  cursor-pointer transition-all text-sm ${activeClass}`}
                   >
                     {item.url}
                   </li>
