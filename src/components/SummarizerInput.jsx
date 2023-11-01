@@ -6,11 +6,11 @@ import { useLazyFetchArticleQuery } from "../api/apiSlice";
 const SummarizerInput = () => {
   const dispatch = useDispatch();
   const [articleUrl, setArticleUrl] = useState("");
-  const [fetchArticle] = useLazyFetchArticleQuery();
+  const [fetchArticle, { isLoading }] = useLazyFetchArticleQuery();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (articleUrl == "") {
+    if (articleUrl === "") {
       return;
     }
     const { data } = await fetchArticle({
@@ -45,10 +45,13 @@ const SummarizerInput = () => {
             }}
           />
           <button
-            className="bg-white text-black h-full px-6 py-3 rounde"
+            className={`${
+              isLoading ? "bg-gray-600" : "bg-white"
+            } text-black h-full px-6 py-3`}
             type="submit"
+            disabled={isLoading}
           >
-            ⏎
+            {isLoading ? "Loading..." : "⏎"}{" "}
           </button>
         </form>
       </div>
