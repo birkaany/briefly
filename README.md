@@ -46,7 +46,7 @@
 
 
 
-![https://i.hizliresim.com/hec23oz](https://i.hizliresim.com/hec23oz)
+![https://i.hizliresim.com/hec23oz.png](https://i.hizliresim.com/hec23oz.png)
 
 
 
